@@ -1,0 +1,40 @@
+$primary: #ff8bb1;
+$link: #ffffff;
+$link-hover: $link;
+$dark: #2e3440;
+$light: #f4f6f9;
+$code: #ffffff;
+$family-code: "IBM Plex Mono";
+$section-padding: 5rem 1.5rem;
+// from superhero theme
+$grey-darker: #2e3440;
+$grey-dark: #3b4252;
+$grey: #434c5e;
+$grey-light: #4c566a;
+$grey-lighter: #d8dee9;
+$dark: $grey-darker;
+$title-color: $grey-lighter;
+$title-weight: 400;
+$subtitle-strong-color: $grey-lighter;
+$subtitle-color: darken($grey-lighter, 10);
+$subtitle-strong-color: darken($grey-lighter, 10);
+$background: $grey-dark;
+$body-background-color: $grey-dark;
+$footer-background-color: #d8dee9;
+$border: $grey;
+$text: $grey-lighter;
+$text-strong: darken($grey-lighter, 10);
+$text-light: $grey-light;
+$card-shadow: none;
+$card-background-color: darken($body-background-color, 3);
+$card-header-box-shadow: none;
+$card-header-background-color: $grey-darker;
+$card-footer-background-color: $grey-darker;
+// Import complete Bulma
+@import '~bulma/bulma';
+// Import Component main Sass File
+@import '~@creativebulma/bulma-collapsible';
+// Import fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap');
