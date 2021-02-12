@@ -1,57 +1,53 @@
 <template>
-  <div class="container columns">
-    <code class="column is-half" :style="{ 'padding-left': calculateMargin() }"
-      >└ {{ command.name }}
-      <span class="usage-string">{{ command.usage }}</span></code
+    <div class="container columns">
+        <code class="column is-half" :style="{ 'padding-left': calculateMargin() }"
+            >└ {{ command.name }} <span class="usage-string">{{ command.usage }}</span></code
+        >
+        <span class="description column" v-html="renderDescription(command.description)"></span>
+    </div>
+    <SubCommand
+        v-for="item in command.subcommands"
+        v-bind:command="item"
+        v-bind:key="item.id"
+        :parentName="newParentName"
+        :margin="deeperMargin"
     >
-    <span
-      class="description column"
-      v-html="renderDescription(command.description)"
-    ></span>
-  </div>
-  <SubCommand
-    v-for="item in command.subcommands"
-    v-bind:command="item"
-    v-bind:key="item.id"
-    :parentName="newParentName"
-    :margin="deeperMargin"
-  >
-  </SubCommand>
+    </SubCommand>
 </template>
 
 <style scoped>
 .container {
-  text-align: left;
+    text-align: left;
 }
 .description {
-  font-style: italic;
+    font-style: italic;
 }
 .usage-string {
-  color: lightblue;
+    color: lightblue;
 }
 .column {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 </style>
 
 <script>
 export default {
-  name: "SubCommand",
-  data() {
-    return {
-      deeperMargin: this.margin + 2,
-      newParentName: `${this.parentName} ${this.command.name}`,
-    };
-  },
-  methods: {
-    calculateMargin() {
-      return `${this.deeperMargin}em`;
+    name: 'SubCommand',
+    data() {
+        return {
+            deeperMargin: this.margin + 2,
+            newParentName: `${this.parentName} ${this.command.name}`,
+        };
     },
-    renderDescription(desc) {
-      return desc;
+    methods: {
+        calculateMargin() {
+            return `${this.deeperMargin}em`;
+        },
+        renderDescription(desc) {
+            return desc;
+        },
     },
-  },
-  props: { command: {}, parentName: String, margin: Number },
+    props: { command: {}, parentName: String, margin: Number },
 };
 </script>
