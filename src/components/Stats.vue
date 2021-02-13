@@ -50,7 +50,7 @@ export default {
     data() {
         return {
             hasData: false,
-            dataUrl: 'https://misobot.xyz/stats',
+            dataUrl: 'https://api.misobot.xyz/stats',
             guildsCount: 0,
             usersCount: 0,
             commandsCount: 0,

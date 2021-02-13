@@ -1,7 +1,15 @@
 <template>
     <div class="hero-body">
         <div id="introContent" class="container has-text-centered">
-            <img src="../assets/icon_circle.png" alt="Logo" style="max-width: 5rem;" />
+            <div class="avatar-container">
+                <img src="../assets/icon_circle.png" alt="Logo" style="max-width: 5rem;" />
+                <span
+                    class="status-circle"
+                    :class="{ 'status-online': online, 'status-offline': !online }"
+                >
+                    <span class="tooltiptext">{{ ping }}</span>
+                </span>
+            </div>
             <h1 class="title">
                 {{ title }}
             </h1>
@@ -59,6 +67,58 @@
     font-family: Raleway;
     font-weight: 500;
 }
+.avatar-container {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    max-width: 80px;
+    max-height: 80px;
+}
+.status-circle {
+    background: #2e3440;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    border: 5px solid #2e3440;
+}
+.status-circle .tooltiptext {
+    font-family: Raleway;
+    visibility: hidden;
+    min-width: 80px;
+    background-color: #121822;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -4px;
+    left: 150%;
+}
+.status-circle .tooltiptext::after {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #121822 transparent transparent;
+}
+.status-circle:hover .tooltiptext {
+    visibility: visible;
+}
+.status-online {
+    background: #43b581;
+}
+.status-offline {
+    background: #2e3440;
+    box-shadow: inset 0px 0px 0px 5px #747f8d;
+}
 </style>
 
 <script>
@@ -70,9 +130,34 @@ export default {
         Stats,
         Wave,
     },
+    data() {
+        return {
+            pingUrl: 'https://api.misobot.xyz/ping',
+            ping: 'offline',
+            online: false,
+        };
+    },
     props: {
         title: String,
         subtitle: String,
+    },
+    mounted() {
+        fetch(this.pingUrl)
+            .then((response) => response.text())
+            .then((data) => {
+                this.ping = parseInt(data);
+                if (isNaN(this.ping) || this.ping == undefined) {
+                    this.online = false;
+                    this.ping = 'offline';
+                } else {
+                    this.online = true;
+                    this.ping = this.ping + ' ms';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                this.online = false;
+            });
     },
 };
 </script>
