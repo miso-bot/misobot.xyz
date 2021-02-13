@@ -15,7 +15,6 @@ export default {
         };
     },
     props: {
-        url: { type: String, required: true },
         id: {
             type: String,
             default: 'myCounter',
@@ -26,7 +25,7 @@ export default {
         },
         endVal: {
             type: Number,
-            required: false,
+            required: true,
         },
         decimals: {
             type: Number,
@@ -58,15 +57,8 @@ export default {
         },
     },
     mounted() {
-        //console.log(value);
-        fetch(this.url)
-            .then((response) => response.text())
-            .then((text) => {
-                const value = text;
-                console.log(value);
-                this.counter = new CountUp(this.id, value);
-                this.counter.start();
-            });
+        this.counter = new CountUp(this.id, this.endVal);
+        this.counter.start();
     },
 };
 </script>
