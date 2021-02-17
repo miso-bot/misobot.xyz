@@ -38,7 +38,7 @@
 
 .card-content {
     padding: 0;
-    max-height: 150em;
+    max-height: 500em;
     overflow: hidden;
     transition: 0.3s ease all;
 }

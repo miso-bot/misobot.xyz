@@ -248,6 +248,59 @@ export default {
                                 },
                             ],
                         },
+                        {
+                            name: 'blacklist',
+                            subcommands: [
+                                {
+                                    name: 'show',
+                                    description: 'Show everything that is currently blacklisted',
+                                },
+                                {
+                                    name: 'member',
+                                    usage: '[member]',
+                                    description: 'Blacklist a member from using commands',
+                                },
+                                {
+                                    name: 'channel',
+                                    usage: '[channel]',
+                                    description:
+                                        'Blacklist a channel so that no commands can be used there',
+                                },
+                                {
+                                    name: 'command',
+                                    usage: '[command]',
+                                    description:
+                                        'Blacklist a command from being used on this server',
+                                },
+                                {
+                                    name: 'delete',
+                                    usage: '[boolean]',
+                                    description:
+                                        'Toggle whether to delete messages on blacklist trigger',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'whitelist',
+                            description: 'Reverse blacklisting',
+                            subcommands: [
+                                {
+                                    name: 'member',
+                                    usage: '[member]',
+                                    description: 'Whitelist a member',
+                                },
+                                {
+                                    name: 'channel',
+                                    usage: '[channel]',
+                                    description: 'Whitelist a channel',
+                                },
+                                {
+                                    name: 'command',
+                                    usage: '[command]',
+                                    description: 'Whitelist a command',
+                                },
+                            ],
+                        },
                     ],
                 },
                 {
@@ -656,59 +709,6 @@ export default {
                             description:
                                 'Delete amount of messages from this channel, optionally filtered by users',
                         },
-                        {
-                            name: 'blacklist',
-                            subcommands: [
-                                {
-                                    name: 'show',
-                                    description: 'Show everything that is currently blacklisted',
-                                },
-                                {
-                                    name: 'member',
-                                    usage: '[member]',
-                                    description: 'Blacklist a member from using commands',
-                                },
-                                {
-                                    name: 'channel',
-                                    usage: '[channel]',
-                                    description:
-                                        'Blacklist a channel so that no commands can be used there',
-                                },
-                                {
-                                    name: 'command',
-                                    usage: '[command]',
-                                    description:
-                                        'Blacklist a command from being used on this server',
-                                },
-                                {
-                                    name: 'delete',
-                                    usage: '[boolean]',
-                                    description:
-                                        'Toggle whether to delete messages on blacklist trigger',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'whitelist',
-                            description: 'Reverse blacklisting',
-                            subcommands: [
-                                {
-                                    name: 'member',
-                                    usage: '[member]',
-                                    description: 'Whitelist a member',
-                                },
-                                {
-                                    name: 'channel',
-                                    usage: '[channel]',
-                                    description: 'Whitelist a channel',
-                                },
-                                {
-                                    name: 'command',
-                                    usage: '[command]',
-                                    description: 'Whitelist a command',
-                                },
-                            ],
-                        },
                     ],
                 },
                 {
@@ -716,29 +716,34 @@ export default {
                     description: 'Set up custom server specific commands',
                     commandList: [
                         {
-                            name: 'add',
-                            usage: '[keyword] [response...]',
-                            description: 'Add a new custom command',
-                        },
-                        {
-                            name: 'remove',
-                            usage: '[keyword]',
-                            description: 'remove a custom command',
-                        },
-                        {
-                            name: 'search',
-                            usage: '[keyword]',
-                            description: 'Search for commands',
-                        },
-                        {
-                            name: 'list',
-                            description: 'List all custom commands on this server',
-                        },
-                        {
-                            name: 'restrict',
-                            usage: '[boolean]',
-                            description:
-                                'Restrict adding commands to people with <code>manage_server</code> permission',
+                            name: 'command',
+                            subcommands: [
+                                {
+                                    name: 'add',
+                                    usage: '[keyword] [response...]',
+                                    description: 'Add a new custom command',
+                                },
+                                {
+                                    name: 'remove',
+                                    usage: '[keyword]',
+                                    description: 'remove a custom command',
+                                },
+                                {
+                                    name: 'search',
+                                    usage: '[keyword]',
+                                    description: 'Search for commands',
+                                },
+                                {
+                                    name: 'list',
+                                    description: 'List all custom commands on this server',
+                                },
+                                {
+                                    name: 'restrict',
+                                    usage: '[boolean]',
+                                    description:
+                                        'Restrict adding commands to people with <code>manage_server</code> permission',
+                                },
+                            ],
                         },
                     ],
                 },
