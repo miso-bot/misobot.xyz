@@ -257,12 +257,12 @@ export default {
                                 },
                                 {
                                     name: 'member',
-                                    usage: '[member]',
+                                    usage: '[members...]',
                                     description: 'Blacklist a member from using commands',
                                 },
                                 {
                                     name: 'channel',
-                                    usage: '[channel]',
+                                    usage: '[channels...]',
                                     description:
                                         'Blacklist a channel so that no commands can be used there',
                                 },
@@ -281,17 +281,17 @@ export default {
                             ],
                         },
                         {
-                            name: 'whitelist',
-                            description: 'Reverse blacklisting',
+                            name: 'unblacklist',
+                            description: 'Reverse blacklist',
                             subcommands: [
                                 {
                                     name: 'member',
-                                    usage: '[member]',
+                                    usage: '[members...]',
                                     description: 'Whitelist a member',
                                 },
                                 {
                                     name: 'channel',
-                                    usage: '[channel]',
+                                    usage: '[channels...]',
                                     description: 'Whitelist a channel',
                                 },
                                 {
@@ -518,6 +518,12 @@ export default {
                             description: 'Remove a notification',
                         },
                         { name: 'list', description: 'List all your notifications' },
+                        { name: 'clear', description: 'Clear your notifications' },
+                        {
+                            name: 'test',
+                            usage: '(message_id)',
+                            description: 'Test if notifications are working',
+                        },
                     ],
                 },
                 {
@@ -816,6 +822,9 @@ export default {
                             usage: '[name] and [name]',
                             description: 'Ship two people',
                         },
+                        { name: 'marry', usage: '[user]', description: 'Marry someone' },
+                        { name: 'marriage', description: 'Check your marriage status' },
+                        { name: 'divorce', description: 'End your marriage' },
                         {
                             name: 'horoscope',
                             description: 'Check your daily horoscope',
@@ -1042,6 +1051,11 @@ export default {
                             name: 'rank',
                             usage: '(@user)',
                             description: 'See your XP ranking',
+                        },
+                        {
+                            name: 'globalrank',
+                            usage: '(@user)',
+                            description: 'See your global XP ranking',
                         },
                         {
                             name: 'profile',
