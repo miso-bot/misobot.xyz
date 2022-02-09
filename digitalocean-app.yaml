@@ -3,8 +3,7 @@ domains:
     type: PRIMARY
 name: miso-bot-website
 region: ams
-cors:
-  allow_credentials: True
+
 static_sites:
   - build_command: yarn build
     environment_slug: node-js
@@ -15,3 +14,5 @@ static_sites:
     name: miso-bot-website
     routes:
       - path: /
+    cors:
+      allow_credentials: True
