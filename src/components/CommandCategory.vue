@@ -54,9 +54,9 @@
 </style>
 
 <script>
-import Command from './Command.vue';
+import Command from "./Command.vue";
 export default {
-    name: 'CommandCategory',
+    name: "CommandCategory",
     components: { Command },
     data() {
         return {
@@ -64,7 +64,7 @@ export default {
         };
     },
     methods: {
-        toggleAccordion: function() {
+        toggleAccordion: function () {
             this.isOpen = !this.isOpen;
         },
         renderDescription(desc) {
@@ -72,9 +72,9 @@ export default {
         },
     },
     computed: {
-        accordionClasses: function() {
+        accordionClasses: function () {
             return {
-                'is-closed': !this.isOpen,
+                "is-closed": !this.isOpen,
             };
         },
     },

@@ -1,9 +1,15 @@
 <template>
     <div class="container columns">
-        <code class="column is-half" :style="{ 'padding-left': calculateMargin() }"
-            >└ {{ command.name }} <span class="usage-string">{{ command.usage }}</span></code
+        <code
+            class="column is-half"
+            :style="{ 'padding-left': calculateMargin() }"
+            >└ {{ command.name }}
+            <span class="usage-string">{{ command.usage }}</span></code
         >
-        <span class="description column" v-html="renderDescription(command.description)"></span>
+        <span
+            class="description column"
+            v-html="renderDescription(command.description)"
+        ></span>
     </div>
     <SubCommand
         v-for="item in command.subcommands"
@@ -33,7 +39,7 @@
 
 <script>
 export default {
-    name: 'SubCommand',
+    name: "SubCommand",
     data() {
         return {
             deeperMargin: this.margin + 2,

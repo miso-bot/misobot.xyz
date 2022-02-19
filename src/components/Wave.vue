@@ -30,7 +30,7 @@
 
 <script>
 export default {
-    name: 'Wave',
+    name: "Wave",
     props: {
         color: String,
     },

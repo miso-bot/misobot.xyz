@@ -1,7 +1,10 @@
 <template>
     <section class="hero is-fullheight is-dark" id="section-home">
         <Header></Header>
-        <HeroPage title="Miso Bot" subtitle="Discord bot with too many features" />
+        <HeroPage
+            title="Miso Bot"
+            subtitle="Discord bot with too many features"
+        />
     </section>
     <Documentation sectionId="section-documentation"></Documentation>
     <DonateSection sectionId="section-donate"></DonateSection>
@@ -10,15 +13,15 @@
 </template>
 
 <script>
-import HeroPage from './components/HeroPage.vue';
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
-import Documentation from './components/Documentation.vue';
-import DonateSection from './components/DonateSection.vue';
-import Wave from './components/Wave.vue';
+import HeroPage from "./components/HeroPage.vue";
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
+import Documentation from "./components/Documentation.vue";
+import DonateSection from "./components/DonateSection.vue";
+import Wave from "./components/Wave.vue";
 
 export default {
-    name: 'App',
+    name: "App",
     components: {
         HeroPage,
         Header,

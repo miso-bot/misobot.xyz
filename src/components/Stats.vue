@@ -4,7 +4,11 @@
             <div class="column has-text-centered">
                 <div>
                     <p class="title">
-                        <Counter id="serversCounter" v-if="hasData" :endVal="guildsCount"></Counter>
+                        <Counter
+                            id="serversCounter"
+                            v-if="hasData"
+                            :endVal="guildsCount"
+                        ></Counter>
                     </p>
                     <p class="heading">Servers</p>
                 </div>
@@ -12,7 +16,11 @@
             <div class="column has-text-centered">
                 <div>
                     <p class="title">
-                        <Counter id="usersCounter" v-if="hasData" :endVal="usersCount"></Counter>
+                        <Counter
+                            id="usersCounter"
+                            v-if="hasData"
+                            :endVal="usersCount"
+                        ></Counter>
                     </p>
                     <p class="heading">Unique users</p>
                 </div>
@@ -41,16 +49,16 @@
 </style>
 
 <script>
-import Counter from './Counter.vue';
+import Counter from "./Counter.vue";
 export default {
-    name: 'Stats',
+    name: "Stats",
     components: {
         Counter,
     },
     data() {
         return {
             hasData: false,
-            dataUrl: 'https://api.misobot.xyz/stats',
+            dataUrl: "https://api.misobot.xyz/stats",
             guildsCount: 0,
             usersCount: 0,
             commandsCount: 0,
@@ -66,7 +74,7 @@ export default {
                 this.hasData = true;
             })
             .catch((error) => {
-                console.error('Error:', error);
+                console.error("Error:", error);
                 this.hasData = true;
             });
     },

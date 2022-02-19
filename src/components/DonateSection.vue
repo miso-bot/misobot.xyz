@@ -3,9 +3,10 @@
         <div class="container">
             <h1 class="title">Donate</h1>
             <p>
-                Hosting a big bot like this is not cheap, and wouldn't be possible without community
-                support!<br />If you like what I'm doing, consider donating. As an extra incentive
-                you get some exclusive commands and perks!
+                Hosting a big bot like this is not cheap, and wouldn't be
+                possible without community support!<br />If you like what I'm
+                doing, consider donating. As an extra incentive you get some
+                exclusive commands and perks!
             </p>
             <nav class="level">
                 <div class="level-item has-text-centered">
@@ -52,15 +53,15 @@
 
 <script>
 export default {
-    name: 'DonateSection',
+    name: "DonateSection",
     props: {
         sectionId: String,
     },
     methods: {
         showBitcoinAddress() {
-            this.$toast.show('1HDwoc5ith4goXmh6CAQC3TP6i1GAqanB1', {
-                type: 'info',
-                position: 'bottom',
+            this.$toast.show("1HDwoc5ith4goXmh6CAQC3TP6i1GAqanB1", {
+                type: "info",
+                position: "bottom",
                 duration: 5000,
                 dismissible: false,
             });

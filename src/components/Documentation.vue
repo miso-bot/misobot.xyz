@@ -1,1152 +1,1279 @@
 <template>
-  <section :id="sectionId" class="section is-dark">
-    <div class="container">
-      <h1 class="title">Commands reference</h1>
-      <p>
-        List of all available commands, along with their arguments and
-        explanations. Many of the commands have subcommands, which are shown
-        indented under them.<br />Syntax for arguments is as follows:
-      </p>
-      <ul>
-        <li>
-          > Required arguments are in <code>[brackets]</code>, optional
-          arguments are in <code>(parentheses)</code>. Insert your own values
-          for these.
-        </li>
-        <li>
-          > By default arguments are split on whitespace, unless
-          <code>"surrouded by quotes"</code> or end with <code>...</code> in
-          this documentation.
-        </li>
-        <li>
-          > String literal options are presented without brackets or
-          parentheses. These are optional but write them as they are shown.
-        </li>
-      </ul>
+    <section :id="sectionId" class="section is-dark">
+        <div class="container">
+            <h1 class="title">Commands reference</h1>
+            <p>
+                List of all available commands, along with their arguments and
+                explanations. Many of the commands have subcommands, which are
+                shown indented under them.<br />Syntax for arguments is as
+                follows:
+            </p>
+            <ul>
+                <li>
+                    > Required arguments are in <code>[brackets]</code>,
+                    optional arguments are in <code>(parentheses)</code>. Insert
+                    your own values for these.
+                </li>
+                <li>
+                    > By default arguments are split on whitespace, unless
+                    <code>"surrouded by quotes"</code> or end with
+                    <code>...</code> in this documentation.
+                </li>
+                <li>
+                    > String literal options are presented without brackets or
+                    parentheses. These are optional but write them as they are
+                    shown.
+                </li>
+            </ul>
 
-      <CommandCategory
-        v-for="item in commandCategories"
-        v-bind:group="item"
-        v-bind:key="item.id"
-        :prefix="prefix"
-      >
-      </CommandCategory>
+            <CommandCategory
+                v-for="item in commandCategories"
+                v-bind:group="item"
+                v-bind:key="item.id"
+                :prefix="prefix"
+            >
+            </CommandCategory>
+        </div>
+    </section>
+    <div>
+        <a
+            href="#section-donate"
+            id="downArrow"
+            class="has-text-centered"
+            v-smooth-scroll
+        >
+            <div>
+                <font-awesome-icon :icon="['fas', 'angle-down']" />
+            </div>
+        </a>
     </div>
-  </section>
-  <div>
-    <a
-      href="#section-donate"
-      id="downArrow"
-      class="has-text-centered"
-      v-smooth-scroll
-    >
-      <div>
-        <font-awesome-icon :icon="['fas', 'angle-down']" />
-      </div>
-    </a>
-  </div>
 </template>
 
 <style scoped>
 #downArrow {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 .container {
-  text-align: left;
+    text-align: left;
 }
 .title {
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 code {
-  color: lightblue;
+    color: lightblue;
 }
 ul {
-  padding: 0.5em;
+    padding: 0.5em;
 }
 </style>
 
 <script>
-import CommandCategory from './CommandCategory.vue';
-import Command from './Command.vue';
+import CommandCategory from "./CommandCategory.vue";
+import Command from "./Command.vue";
 export default {
-    name: 'Documentation',
+    name: "Documentation",
     components: {
         CommandCategory,
         Command,
     },
     data() {
         return {
-            prefix: '>',
+            prefix: ">",
             commandCategories: [
                 {
-                    name: 'Configuration',
-                    description: 'Configure how the bot behaves on your server',
+                    name: "Configuration",
+                    description: "Configure how the bot behaves on your server",
                     commandList: [
                         {
-                            name: 'prefix',
-                            usage: '[prefix]',
-                            description: 'Change the bot prefix to whatever you want',
-                        },
-                        {
-                            name: 'autoresponses',
-                            usage: '[boolean]',
+                            name: "prefix",
+                            usage: "[prefix]",
                             description:
-                                'Toggle automatic responses to certain message content (easter eggs)',
+                                "Change the bot prefix to whatever you want",
                         },
                         {
-                            name: 'levelup',
-                            usage: '[boolean]',
-                            description: 'Toggle levelup messages on or off',
-                        },
-                        {
-                            name: 'muterole',
-                            usage: '[role]',
+                            name: "autoresponses",
+                            usage: "[boolean]",
                             description:
-                                'Set the role to be added to users when muted using the mute command',
+                                "Toggle automatic responses to certain message content (easter eggs)",
                         },
                         {
-                            name: 'autorole',
+                            name: "levelup",
+                            usage: "[boolean]",
+                            description: "Toggle levelup messages on or off",
+                        },
+                        {
+                            name: "muterole",
+                            usage: "[role]",
                             description:
-                                'Configure roles to be given automatically to any new members',
-                            subcommands: [
-                                {
-                                    name: 'add',
-                                    usage: '[role]',
-                                    description: 'Add an autorole',
-                                },
-                                {
-                                    name: 'remove',
-                                    usage: '[role]',
-                                    description: 'Remove an autorole',
-                                },
-                                {
-                                    name: 'list',
-                                    description: 'List current autoroles on this server',
-                                },
-                            ],
+                                "Set the role to be added to users when muted using the mute command",
                         },
                         {
-                            name: 'starboard',
-                            subcommands: [
-                                {
-                                    name: 'channel',
-                                    usage: '[channel]',
-                                    description: 'Set the starboard channel',
-                                },
-                                {
-                                    name: 'toggle',
-                                    usage: '[boolean]',
-                                    description: 'Toggle the starboard on or off',
-                                },
-                                {
-                                    name: 'emoji',
-                                    usage: '[emoji]',
-                                    description:
-                                        'Change the starboard emoji to be something other than :star:',
-                                },
-                                {
-                                    name: 'amount',
-                                    usage: '[amount]',
-                                    description:
-                                        'Change the amount of reactions needed for message to be starboarded',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'votechannel',
+                            name: "autorole",
                             description:
-                                'Set channels where automatic voting reactions are added to messages',
+                                "Configure roles to be given automatically to any new members",
                             subcommands: [
                                 {
-                                    name: 'add',
-                                    usage: '[channel] (type)',
-                                    description: 'Add a voting channel',
+                                    name: "add",
+                                    usage: "[role]",
+                                    description: "Add an autorole",
                                 },
                                 {
-                                    name: 'remove',
-                                    usage: '[channel]',
-                                    description: 'Remove a voting channel',
-                                },
-                                { name: 'list', description: 'List current voting channels' },
-                            ],
-                        },
-                        {
-                            name: 'greeter',
-                            description: 'Set up welcome messages for new members',
-                            subcommands: [
-                                {
-                                    name: 'channel',
-                                    usage: '[channel]',
-                                    description: 'Set the welcome channel',
+                                    name: "remove",
+                                    usage: "[role]",
+                                    description: "Remove an autorole",
                                 },
                                 {
-                                    name: 'toggle',
-                                    usage: '[boolean]',
-                                    description: 'Toggle the greeter on or off',
-                                },
-                                {
-                                    name: 'message',
-                                    usage: '[message...] default',
+                                    name: "list",
                                     description:
-                                        'Change the formatting of the welcome message. Available formatting tokens are: <code>{user}, {username}, {mention}, {guild}, {id}</code>',
+                                        "List current autoroles on this server",
                                 },
                             ],
                         },
                         {
-                            name: 'goodbyemessage',
-                            description: 'Set up goodbye messages when members leave',
+                            name: "starboard",
                             subcommands: [
                                 {
-                                    name: 'channel',
-                                    usage: '[channel]',
-                                    description: 'Set the goodbye channel',
+                                    name: "channel",
+                                    usage: "[channel]",
+                                    description: "Set the starboard channel",
                                 },
                                 {
-                                    name: 'toggle',
-                                    usage: '[boolean]',
-                                    description: 'Toggle the goodbye messages on or off',
-                                },
-                                {
-                                    name: 'message',
-                                    usage: '[message...] default',
+                                    name: "toggle",
+                                    usage: "[boolean]",
                                     description:
-                                        'Change the formatting of the goodbye message. Available formatting tokens are: <code>{user}, {username}, {mention}, {guild}, {id}</code>',
+                                        "Toggle the starboard on or off",
+                                },
+                                {
+                                    name: "emoji",
+                                    usage: "[emoji]",
+                                    description:
+                                        "Change the starboard emoji to be something other than :star:",
+                                },
+                                {
+                                    name: "amount",
+                                    usage: "[amount]",
+                                    description:
+                                        "Change the amount of reactions needed for message to be starboarded",
                                 },
                             ],
                         },
                         {
-                            name: 'logger',
-                            description: 'Log various guild events',
+                            name: "votechannel",
+                            description:
+                                "Set channels where automatic voting reactions are added to messages",
                             subcommands: [
                                 {
-                                    name: 'members',
-                                    usage: '[channel]',
-                                    description: 'Set channel for logging member changes',
+                                    name: "add",
+                                    usage: "[channel] (type)",
+                                    description: "Add a voting channel",
                                 },
                                 {
-                                    name: 'bans',
-                                    usage: '[channel]',
-                                    description: 'Set channel where bans are logged',
+                                    name: "remove",
+                                    usage: "[channel]",
+                                    description: "Remove a voting channel",
                                 },
                                 {
-                                    name: 'deleted',
+                                    name: "list",
+                                    description: "List current voting channels",
+                                },
+                            ],
+                        },
+                        {
+                            name: "greeter",
+                            description:
+                                "Set up welcome messages for new members",
+                            subcommands: [
+                                {
+                                    name: "channel",
+                                    usage: "[channel]",
+                                    description: "Set the welcome channel",
+                                },
+                                {
+                                    name: "toggle",
+                                    usage: "[boolean]",
+                                    description: "Toggle the greeter on or off",
+                                },
+                                {
+                                    name: "message",
+                                    usage: "[message...] default",
+                                    description:
+                                        "Change the formatting of the welcome message. Available formatting tokens are: <code>{user}, {username}, {mention}, {guild}, {id}</code>",
+                                },
+                            ],
+                        },
+                        {
+                            name: "goodbyemessage",
+                            description:
+                                "Set up goodbye messages when members leave",
+                            subcommands: [
+                                {
+                                    name: "channel",
+                                    usage: "[channel]",
+                                    description: "Set the goodbye channel",
+                                },
+                                {
+                                    name: "toggle",
+                                    usage: "[boolean]",
+                                    description:
+                                        "Toggle the goodbye messages on or off",
+                                },
+                                {
+                                    name: "message",
+                                    usage: "[message...] default",
+                                    description:
+                                        "Change the formatting of the goodbye message. Available formatting tokens are: <code>{user}, {username}, {mention}, {guild}, {id}</code>",
+                                },
+                            ],
+                        },
+                        {
+                            name: "logger",
+                            description: "Log various guild events",
+                            subcommands: [
+                                {
+                                    name: "members",
+                                    usage: "[channel]",
+                                    description:
+                                        "Set channel for logging member changes",
+                                },
+                                {
+                                    name: "bans",
+                                    usage: "[channel]",
+                                    description:
+                                        "Set channel where bans are logged",
+                                },
+                                {
+                                    name: "deleted",
                                     subcommands: [
                                         {
-                                            name: 'channel',
-                                            usage: '[channel]',
+                                            name: "channel",
+                                            usage: "[channel]",
                                             description:
-                                                'Set channel where deleted messages are logged',
+                                                "Set channel where deleted messages are logged",
                                         },
                                         {
-                                            name: 'ignore',
-                                            usage: '[channel]',
+                                            name: "ignore",
+                                            usage: "[channel]",
                                             description:
-                                                'Ignore some channel from deleted messages logging',
+                                                "Ignore some channel from deleted messages logging",
                                         },
                                         {
-                                            name: 'unignore',
-                                            usage: '[channel]',
-                                            description: 'Reverse the ignoring you did',
+                                            name: "unignore",
+                                            usage: "[channel]",
+                                            description:
+                                                "Reverse the ignoring you did",
                                         },
                                     ],
                                 },
                             ],
                         },
                         {
-                            name: 'blacklist',
+                            name: "blacklist",
                             subcommands: [
                                 {
-                                    name: 'show',
-                                    description: 'Show everything that is currently blacklisted',
-                                },
-                                {
-                                    name: 'member',
-                                    usage: '[members...]',
-                                    description: 'Blacklist a member from using commands',
-                                },
-                                {
-                                    name: 'channel',
-                                    usage: '[channels...]',
+                                    name: "show",
                                     description:
-                                        'Blacklist a channel so that no commands can be used there',
+                                        "Show everything that is currently blacklisted",
                                 },
                                 {
-                                    name: 'command',
-                                    usage: '[command]',
+                                    name: "member",
+                                    usage: "[members...]",
                                     description:
-                                        'Blacklist a command from being used on this server',
+                                        "Blacklist a member from using commands",
                                 },
                                 {
-                                    name: 'delete',
-                                    usage: '[boolean]',
+                                    name: "channel",
+                                    usage: "[channels...]",
                                     description:
-                                        'Toggle whether to delete messages on blacklist trigger',
+                                        "Blacklist a channel so that no commands can be used there",
+                                },
+                                {
+                                    name: "command",
+                                    usage: "[command]",
+                                    description:
+                                        "Blacklist a command from being used on this server",
+                                },
+                                {
+                                    name: "delete",
+                                    usage: "[boolean]",
+                                    description:
+                                        "Toggle whether to delete messages on blacklist trigger",
                                 },
                             ],
                         },
                         {
-                            name: 'unblacklist',
-                            description: 'Reverse blacklist',
+                            name: "unblacklist",
+                            description: "Reverse blacklist",
                             subcommands: [
                                 {
-                                    name: 'member',
-                                    usage: '[members...]',
-                                    description: 'Whitelist a member',
+                                    name: "member",
+                                    usage: "[members...]",
+                                    description: "Whitelist a member",
                                 },
                                 {
-                                    name: 'channel',
-                                    usage: '[channels...]',
-                                    description: 'Whitelist a channel',
+                                    name: "channel",
+                                    usage: "[channels...]",
+                                    description: "Whitelist a channel",
                                 },
                                 {
-                                    name: 'command',
-                                    usage: '[command]',
-                                    description: 'Whitelist a command',
+                                    name: "command",
+                                    usage: "[command]",
+                                    description: "Whitelist a command",
                                 },
                             ],
                         },
                     ],
                 },
                 {
-                    name: 'LastFm',
+                    name: "LastFm",
                     description:
-                        'Commands interacting with the Last.fm API.<br> For timeframe parameter you can use <code>day, week, month, year</code> or <code>alltime</code>.<br>For anything requiring track, album or artist name you can use <code>np</code> to query your currently playing song.',
+                        "Commands interacting with the Last.fm API.<br> For timeframe parameter you can use <code>day, week, month, year</code> or <code>alltime</code>.<br>For anything requiring track, album or artist name you can use <code>np</code> to query your currently playing song.",
                     commandList: [
                         {
-                            name: 'fm',
+                            name: "fm",
                             description:
                                 "These use your linked Last.fm account, or @mentioned user's",
                             subcommands: [
                                 {
-                                    name: 'set',
-                                    usage: '[lastfm username]',
-                                    description: 'Save your Last.fm username',
+                                    name: "set",
+                                    usage: "[lastfm username]",
+                                    description: "Save your Last.fm username",
                                 },
                                 {
-                                    name: 'unset',
-                                    description: 'Unlink your Last.fm account',
+                                    name: "unset",
+                                    description: "Unlink your Last.fm account",
                                 },
                                 {
-                                    name: 'youtube',
-                                    description: 'Get youtube link for your currently playing song',
-                                },
-                                {
-                                    name: 'album',
-                                    usage: '[album] | [artist]',
-                                    description: 'Your top tracks from a given album',
-                                },
-                                {
-                                    name: 'chart',
-                                    usage: '(timeframe) (width)x(height) artist notitle',
-                                    description: 'Collage of your top albums or artists',
-                                },
-                                {
-                                    name: 'colorchart',
-                                    usage: '[#hex] (width)x(height) rainbow rainbowdiagonal',
+                                    name: "youtube",
                                     description:
-                                        'Collage based on album color, use with hex color or rainbow options',
+                                        "Get youtube link for your currently playing song",
                                 },
                                 {
-                                    name: 'artist',
-                                    usage: '(timeframe)',
-                                    description: '',
+                                    name: "album",
+                                    usage: "[album] | [artist]",
+                                    description:
+                                        "Your top tracks from a given album",
+                                },
+                                {
+                                    name: "chart",
+                                    usage: "(timeframe) (width)x(height) artist notitle",
+                                    description:
+                                        "Collage of your top albums or artists",
+                                },
+                                {
+                                    name: "colorchart",
+                                    usage: "[#hex] (width)x(height) rainbow rainbowdiagonal",
+                                    description:
+                                        "Collage based on album color, use with hex color or rainbow options",
+                                },
+                                {
+                                    name: "artist",
+                                    usage: "(timeframe)",
+                                    description: "",
                                     subcommands: [
                                         {
-                                            name: 'toptracks',
-                                            usage: '[artist]',
-                                            description: 'Your top tracks for the specified artist',
+                                            name: "toptracks",
+                                            usage: "[artist]",
+                                            description:
+                                                "Your top tracks for the specified artist",
                                         },
                                         {
-                                            name: 'topalbums',
-                                            usage: '[artist]',
-                                            description: 'Your top albums for the specified artist',
+                                            name: "topalbums",
+                                            usage: "[artist]",
+                                            description:
+                                                "Your top albums for the specified artist",
                                         },
                                         {
-                                            name: 'overview',
-                                            usage: '[artist]',
-                                            description: 'Your overview for the specified artist',
+                                            name: "overview",
+                                            usage: "[artist]",
+                                            description:
+                                                "Your overview for the specified artist",
                                         },
                                     ],
                                 },
                                 {
-                                    name: 'nowplaying',
-                                    description: 'Your currently playing song',
+                                    name: "nowplaying",
+                                    description: "Your currently playing song",
                                 },
                                 {
-                                    name: 'toptracks',
-                                    usage: '(timeframe) (amount)',
-                                    description: 'Your most listened to tracks',
+                                    name: "toptracks",
+                                    usage: "(timeframe) (amount)",
+                                    description: "Your most listened to tracks",
                                 },
                                 {
-                                    name: 'topartists',
-                                    usage: '(timeframe) (amount)',
-                                    description: 'Your most listened to artists',
+                                    name: "topartists",
+                                    usage: "(timeframe) (amount)",
+                                    description:
+                                        "Your most listened to artists",
                                 },
                                 {
-                                    name: 'topalbums',
-                                    usage: '(timeframe) (amount)',
-                                    description: 'Your most listened to albums',
+                                    name: "topalbums",
+                                    usage: "(timeframe) (amount)",
+                                    description: "Your most listened to albums",
                                 },
                                 {
-                                    name: 'recent',
-                                    usage: '(amount)',
-                                    description: 'Your most recent tracks',
+                                    name: "recent",
+                                    usage: "(amount)",
+                                    description: "Your most recent tracks",
                                 },
                                 {
-                                    name: 'last',
-                                    usage: '[ week | month | year ]',
-                                    description: 'Your Last.fm listening overview',
+                                    name: "last",
+                                    usage: "[ week | month | year ]",
+                                    description:
+                                        "Your Last.fm listening overview",
                                 },
                                 {
-                                    name: 'profile',
-                                    description: 'Your Last.fm profile',
+                                    name: "profile",
+                                    description: "Your Last.fm profile",
                                 },
                                 {
-                                    name: 'server',
-                                    description: '',
+                                    name: "server",
+                                    description: "",
                                     subcommands: [
                                         {
-                                            name: 'topartists',
+                                            name: "topartists",
                                             description:
                                                 "Combined top artists of the server's members",
                                         },
                                         {
-                                            name: 'topalbums',
+                                            name: "topalbums",
                                             description:
                                                 "Combined top albums of the server's members",
                                         },
                                         {
-                                            name: 'toptracks',
+                                            name: "toptracks",
                                             description:
                                                 "Combined top tracks of the server's members",
                                         },
                                         {
-                                            name: 'nowplaying',
+                                            name: "nowplaying",
                                             description:
-                                                'What people on the server are listening to at the moment',
+                                                "What people on the server are listening to at the moment",
                                         },
                                         {
-                                            name: 'recent',
+                                            name: "recent",
                                             description:
-                                                'What people on the server were recently listening to',
+                                                "What people on the server were recently listening to",
                                         },
                                     ],
                                 },
                             ],
                         },
                         {
-                            name: 'whoknows',
-                            usage: '[artist]',
-                            description: 'Who has listened to given artist most on the server',
-                        },
-                        {
-                            name: 'whoknowstrack',
-                            usage: '[track] | [artist]',
-                            description: 'Who has listened to given track most on the server',
-                        },
-                        {
-                            name: 'whoknowsalbum',
-                            usage: '[album] | [artist]',
-                            description: 'Who has listened to given album most on the server',
-                        },
-                        { name: 'crowns', description: 'Check your artist crowns' },
-                        {
-                            name: 'lyrics',
-                            usage: '[song]',
-                            description: 'Search for song lyrics',
-                        },
-                        {
-                            name: 'report',
-                            usage: '[lastfm username] [reason...]',
+                            name: "whoknows",
+                            usage: "[artist]",
                             description:
-                                'Report a lastfm account that is botting plays to gain crowns',
+                                "Who has listened to given artist most on the server",
+                        },
+                        {
+                            name: "whoknowstrack",
+                            usage: "[track] | [artist]",
+                            description:
+                                "Who has listened to given track most on the server",
+                        },
+                        {
+                            name: "whoknowsalbum",
+                            usage: "[album] | [artist]",
+                            description:
+                                "Who has listened to given album most on the server",
+                        },
+                        {
+                            name: "crowns",
+                            description: "Check your artist crowns",
+                        },
+                        {
+                            name: "lyrics",
+                            usage: "[song]",
+                            description: "Search for song lyrics",
+                        },
+                        {
+                            name: "report",
+                            usage: "[lastfm username] [reason...]",
+                            description:
+                                "Report a lastfm account that is botting plays to gain crowns",
                         },
                     ],
                 },
                 {
-                    name: 'Fishy',
-                    description: 'Fishing minigame',
+                    name: "Fishy",
+                    description: "Fishing minigame",
                     commandList: [
                         {
-                            name: 'fishy',
-                            usage: '(@user)',
-                            description: 'Go fishing',
+                            name: "fishy",
+                            usage: "(@user)",
+                            description: "Go fishing",
                         },
-                        { name: 'fishytimer', description: 'Check your fishy timer' },
                         {
-                            name: 'fishystats',
-                            usage: '(@user) global',
-                            description: 'See fishing statistics',
+                            name: "fishytimer",
+                            description: "Check your fishy timer",
+                        },
+                        {
+                            name: "fishystats",
+                            usage: "(@user) global",
+                            description: "See fishing statistics",
                         },
                     ],
                 },
                 {
-                    name: 'Rolepicker',
+                    name: "Rolepicker",
                     description:
-                        'Set up a channel where users can add and delete roles using <code>+name</code> and <code>-name</code>',
+                        "Set up a channel where users can add and delete roles using <code>+name</code> and <code>-name</code>",
                     commandList: [
                         {
-                            name: 'add',
-                            usage: '[role] [name]',
-                            description: 'Add a role',
-                        },
-                        { name: 'remove', usage: '[name]', description: 'Remove a role' },
-                        {
-                            name: 'list',
-                            description: 'List all the roles currently available for picking',
+                            name: "add",
+                            usage: "[role] [name]",
+                            description: "Add a role",
                         },
                         {
-                            name: 'channel',
-                            usage: '[channel]',
-                            description: 'Set the channel where rolepicker will function',
+                            name: "remove",
+                            usage: "[name]",
+                            description: "Remove a role",
                         },
                         {
-                            name: 'enabled',
-                            usage: '[boolean]',
-                            description: 'Toggle whether the role picker is enabled',
+                            name: "list",
+                            description:
+                                "List all the roles currently available for picking",
+                        },
+                        {
+                            name: "channel",
+                            usage: "[channel]",
+                            description:
+                                "Set the channel where rolepicker will function",
+                        },
+                        {
+                            name: "enabled",
+                            usage: "[boolean]",
+                            description:
+                                "Toggle whether the role picker is enabled",
                         },
                     ],
                 },
                 {
-                    name: 'Notifications',
-                    description: 'Set up keyword notifications',
+                    name: "Notifications",
+                    description: "Set up keyword notifications",
                     commandList: [
                         {
-                            name: 'notification',
+                            name: "notification",
                             subcommands: [
                                 {
-                                    name: 'add',
-                                    usage: '[keyword]',
-                                    description: 'Add a notification',
+                                    name: "add",
+                                    usage: "[keyword]",
+                                    description: "Add a notification",
                                 },
                                 {
-                                    name: 'remove',
-                                    usage: '[keyword]',
-                                    description: 'Remove a notification',
-                                },
-                                { name: 'list', description: 'List all your notifications' },
-                                { name: 'clear', description: 'Clear your notifications' },
-                                {
-                                    name: 'test',
-                                    usage: '(message_id)',
-                                    description: 'Test if notifications are working',
-                                }
-                            ]
-                        }
-                    ],
-                },
-                {
-                    name: 'Typings',
-                    description: 'Typing speed tests',
-                    commandList: [
-                        {
-                            name: 'typing',
-                            subcommands: [
-                                {
-                                    name: 'test',
-                                    usage: '(language) (wordcount)',
-                                    description: 'Take a typing test',
+                                    name: "remove",
+                                    usage: "[keyword]",
+                                    description: "Remove a notification",
                                 },
                                 {
-                                    name: 'race',
-                                    usage: '(language) (wordcount)',
-                                    description: 'Race against other members of the server',
+                                    name: "list",
+                                    description: "List all your notifications",
                                 },
                                 {
-                                    name: 'history',
-                                    usage: '(@user)',
-                                    description: 'See your typing test history',
+                                    name: "clear",
+                                    description: "Clear your notifications",
                                 },
                                 {
-                                    name: 'stats',
-                                    usage: '(@user)',
-                                    description: 'See statistics about your typing',
-                                },
-                                {
-                                    name: 'cleardata',
-                                    description: 'Delete all your saved typing data',
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    name: 'Reddit',
-                    description: 'Get reddit content',
-                    commandList: [
-                        {
-                            name: 'reddit',
-                            subcommands: [
-                                {
-                                    name: 'hot',
-                                    usage: '[subreddit] (number)',
-                                    description: 'Get hot post from given subreddit',
-                                },
-                                {
-                                    name: 'new',
-                                    usage: '[subreddit] (number)',
-                                    description: 'Get new post from given subreddit',
-                                },
-                                {
-                                    name: 'controversial',
-                                    usage: '[subreddit] (number)',
-                                    description: 'Get controversial post from given subreddit',
-                                },
-                                {
-                                    name: 'top',
-                                    usage: '[subreddit] (number)',
-                                    description: 'Get top post from given subreddit',
-                                },
-                                {
-                                    name: 'random',
-                                    usage: '[subreddit] -i',
+                                    name: "test",
+                                    usage: "(message_id)",
                                     description:
-                                        'Get random post from given subreddit, only images with the <code>-i</code> flag',
+                                        "Test if notifications are working",
                                 },
                             ],
                         },
                     ],
                 },
                 {
-                    name: 'Cryptocurrency',
+                    name: "Typings",
+                    description: "Typing speed tests",
+                    commandList: [
+                        {
+                            name: "typing",
+                            subcommands: [
+                                {
+                                    name: "test",
+                                    usage: "(language) (wordcount)",
+                                    description: "Take a typing test",
+                                },
+                                {
+                                    name: "race",
+                                    usage: "(language) (wordcount)",
+                                    description:
+                                        "Race against other members of the server",
+                                },
+                                {
+                                    name: "history",
+                                    usage: "(@user)",
+                                    description: "See your typing test history",
+                                },
+                                {
+                                    name: "stats",
+                                    usage: "(@user)",
+                                    description:
+                                        "See statistics about your typing",
+                                },
+                                {
+                                    name: "cleardata",
+                                    description:
+                                        "Delete all your saved typing data",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    name: "Reddit",
+                    description: "Get reddit content",
+                    commandList: [
+                        {
+                            name: "reddit",
+                            subcommands: [
+                                {
+                                    name: "hot",
+                                    usage: "[subreddit] (number)",
+                                    description:
+                                        "Get hot post from given subreddit",
+                                },
+                                {
+                                    name: "new",
+                                    usage: "[subreddit] (number)",
+                                    description:
+                                        "Get new post from given subreddit",
+                                },
+                                {
+                                    name: "controversial",
+                                    usage: "[subreddit] (number)",
+                                    description:
+                                        "Get controversial post from given subreddit",
+                                },
+                                {
+                                    name: "top",
+                                    usage: "[subreddit] (number)",
+                                    description:
+                                        "Get top post from given subreddit",
+                                },
+                                {
+                                    name: "random",
+                                    usage: "[subreddit] -i",
+                                    description:
+                                        "Get random post from given subreddit, only images with the <code>-i</code> flag",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    name: "Cryptocurrency",
                     description:
-                        'Cryptocurrency commands. <code>pair</code> defaults to USDT if not specified',
+                        "Cryptocurrency commands. <code>pair</code> defaults to USDT if not specified",
                     commandList: [
                         {
-                            name: 'crypto',
+                            name: "crypto",
                             subcommands: [
                                 {
-                                    name: 'price',
-                                    usage: '[coin] (pair)',
+                                    name: "price",
+                                    usage: "[coin] (pair)",
                                     description:
-                                        'See the current price and 24h statistics of given crypto pair',
+                                        "See the current price and 24h statistics of given crypto pair",
                                 },
                                 {
-                                    name: 'chart',
-                                    usage: '[coin] (pair) (interval) (limit)',
+                                    name: "chart",
+                                    usage: "[coin] (pair) (interval) (limit)",
                                     description:
-                                        'Generates candlestick chart for a given crypto pair',
+                                        "Generates candlestick chart for a given crypto pair",
                                 },
                             ],
                         },
                     ],
                 },
                 {
-                    name: 'Media',
-                    description: 'Various internet media',
+                    name: "Media",
+                    description: "Various internet media",
                     commandList: [
                         {
-                            name: 'gfycat',
-                            usage: '[query...]',
-                            description: 'Search for random gifs from Gfycat',
+                            name: "gfycat",
+                            usage: "[query...]",
+                            description: "Search for random gifs from Gfycat",
                         },
                         {
-                            name: 'google',
-                            usage: '[query]',
-                            description: 'Search from Google',
+                            name: "google",
+                            usage: "[query]",
+                            description: "Search from Google",
                         },
                         {
-                            name: 'googleimages',
-                            usage: '[query]',
-                            description: 'Search from Google Images',
+                            name: "googleimages",
+                            usage: "[query]",
+                            description: "Search from Google Images",
                         },
                         {
-                            name: 'youtube',
-                            usage: '[query...]',
-                            description: 'Search for videos from youtube',
+                            name: "youtube",
+                            usage: "[query...]",
+                            description: "Search for videos from youtube",
                         },
                         {
-                            name: 'instagram',
-                            usage: '[ url | id ] ... -d',
-                            description: 'Extract all the images from one or more instagram posts',
+                            name: "instagram",
+                            usage: "[ url | id ] ... -d",
+                            description:
+                                "Extract all the images from one or more instagram posts",
                         },
                         {
-                            name: 'twitter',
-                            usage: '[ url | id ] ... -d',
-                            description: 'Extract all the images from one or more tweets',
+                            name: "twitter",
+                            usage: "[ url | id ] ... -d",
+                            description:
+                                "Extract all the images from one or more tweets",
                         },
                         {
-                            name: 'melon',
-                            usage: 'day | month | realtime | rising',
-                            description: 'Melon music charts',
+                            name: "melon",
+                            usage: "day | month | realtime | rising",
+                            description: "Melon music charts",
                         },
                         {
-                            name: 'xkcd',
-                            usage: '(id)',
-                            description: 'Get a random xkcd, or one with given ID',
+                            name: "xkcd",
+                            usage: "(id)",
+                            description:
+                                "Get a random xkcd, or one with given ID",
                         },
                         {
-                            name: 'opgg',
-                            description: 'Leageue of Legends summoner information',
+                            name: "opgg",
+                            description:
+                                "Leageue of Legends summoner information",
                             subcommands: [
                                 {
-                                    name: 'profile',
-                                    usage: '[region] [summoner name...]',
-                                    description: 'See op.gg profile of given summoner',
-                                },
-                                {
-                                    name: 'nowplaying',
-                                    usage: '[region] [summoner name...]',
-                                    description: 'See current game of given summoner',
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    name: 'Mod',
-                    description: 'Commands for server moderators',
-                    commandList: [
-                        {
-                            name: 'ban',
-                            usage: '[users...]',
-                            description:
-                                'Ban discord users, get a confirmation dialog for guild members',
-                        },
-                        {
-                            name: 'fastban',
-                            usage: '[users...]',
-                            description: 'Ban users without confirmation',
-                        },
-                        {
-                            name: 'mute',
-                            usage: '[member] for (duration)',
-                            description: 'Mute a member using your configured mute role',
-                        },
-                        {
-                            name: 'unmute',
-                            usage: '[member]',
-                            description: 'Umute a member',
-                        },
-                        {
-                            name: 'purge',
-                            usage: '[amount] (@users...)',
-                            description:
-                                'Delete amount of messages from this channel, optionally filtered by users',
-                        },
-                    ],
-                },
-                {
-                    name: 'Custom commands',
-                    description: 'Set up custom server specific commands',
-                    commandList: [
-                        {
-                            name: 'command',
-                            subcommands: [
-                                {
-                                    name: 'add',
-                                    usage: '[keyword] [response...]',
-                                    description: 'Add a new custom command',
-                                },
-                                {
-                                    name: 'remove',
-                                    usage: '[keyword]',
-                                    description: 'remove a custom command',
-                                },
-                                {
-                                    name: 'search',
-                                    usage: '[keyword]',
-                                    description: 'Search for commands',
-                                },
-                                {
-                                    name: 'list',
-                                    description: 'List all custom commands on this server',
-                                },
-                                {
-                                    name: 'restrict',
-                                    usage: '[boolean]',
+                                    name: "profile",
+                                    usage: "[region] [summoner name...]",
                                     description:
-                                        'Restrict adding commands to people with <code>manage_server</code> permission',
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    name: 'Kpop',
-                    description: 'Kpop related commands',
-                    commandList: [
-                        { name: 'stan', description: 'Get a random kpop artist to stan' },
-                        {
-                            name: 'idol',
-                            description: 'Kpop idols database',
-                            subcommands: [
-                                {
-                                    name: 'random',
-                                    usage: '(gender)',
-                                    description: 'Get profile of a random kpop idol',
+                                        "See op.gg profile of given summoner",
                                 },
                                 {
-                                    name: 'birthdays',
-                                    usage: '[month] [day]',
+                                    name: "nowplaying",
+                                    usage: "[region] [summoner name...]",
                                     description:
-                                        'See which kpop idols have birthdays on a given date',
+                                        "See current game of given summoner",
                                 },
                             ],
                         },
                     ],
                 },
                 {
-                    name: 'Miscellaneous',
-                    description: 'Miscellaneous commands',
+                    name: "Mod",
+                    description: "Commands for server moderators",
                     commandList: [
                         {
-                            name: 'ascii',
-                            usage: '[text...]',
-                            description: 'Turn text into fancy ascii art',
-                        },
-                        {
-                            name: 'choose',
-                            usage: '[choice1] or [choice2] or ... or [choiceN]',
-                            description: 'Choose from any number of options',
-                        },
-                        {
-                            name: 'eightball',
-                            usage: '[question]',
-                            description: 'Ask a yes/no question from the all knowing Eight-ball',
-                        },
-                        {
-                            name: 'rng',
-                            usage: '(start)-[end]',
-                            description: 'Get a random number inside the given range',
-                        },
-                        {
-                            name: 'clap',
-                            usage: '[sentence]',
-                            description: 'Add claps between words',
-                        },
-                        {
-                            name: 'color',
-                            usage: '[ #hex | @member | @role | url | random (amount) ] ...',
+                            name: "ban",
+                            usage: "[users...]",
                             description:
-                                'Get color from given source, give multiple sources to create a pattern',
+                                "Ban discord users, get a confirmation dialog for guild members",
                         },
                         {
-                            name: 'emoji',
-                            usage: '[emoji]',
-                            description: 'See emoji source image and data',
+                            name: "fastban",
+                            usage: "[users...]",
+                            description: "Ban users without confirmation",
                         },
                         {
-                            name: 'ship',
-                            usage: '[name] and [name]',
-                            description: 'Ship two people',
+                            name: "timeout",
+                            usage: "[member] (duration | remove)",
+                            description:
+                                "Timeout a member for a given duration, or remove the timeout",
                         },
-                        { name: 'marry', usage: '[user]', description: 'Marry someone' },
-                        { name: 'marriage', description: 'Check your marriage status' },
-                        { name: 'divorce', description: 'End your marriage' },
                         {
-                            name: 'horoscope',
-                            description: 'Check your daily horoscope',
+                            name: "mute",
+                            usage: "[member] for (duration)",
+                            description:
+                                "Mute a member using your configured mute role",
+                        },
+                        {
+                            name: "unmute",
+                            usage: "[member]",
+                            description: "Umute a member",
+                        },
+                        {
+                            name: "purge",
+                            usage: "[amount] (@users...)",
+                            description:
+                                "Delete amount of messages from this channel, optionally filtered by users",
+                        },
+                    ],
+                },
+                {
+                    name: "Custom commands",
+                    description: "Set up custom server specific commands",
+                    commandList: [
+                        {
+                            name: "command",
                             subcommands: [
                                 {
-                                    name: 'set',
-                                    usage: '[zodiac]',
-                                    description: 'Save your zodiac sign',
+                                    name: "add",
+                                    usage: "[keyword] [response...]",
+                                    description: "Add a new custom command",
                                 },
                                 {
-                                    name: 'list',
+                                    name: "remove",
+                                    usage: "[keyword]",
+                                    description: "remove a custom command",
+                                },
+                                {
+                                    name: "search",
+                                    usage: "[keyword]",
+                                    description: "Search for commands",
+                                },
+                                {
+                                    name: "list",
                                     description:
-                                        'List all zodiac signs along with their date ranges',
+                                        "List all custom commands on this server",
                                 },
                                 {
-                                    name: 'tomorrow',
-                                    description: 'See your horoscope for tomorrow',
-                                },
-                                {
-                                    name: 'yesterday',
-                                    description: 'See your horoscope from yesterday',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'minecraft',
-                            description: 'See the status of saved minecraft server',
-                            subcommands: [
-                                {
-                                    name: 'save',
-                                    usage: '[address] [port]',
+                                    name: "restrict",
+                                    usage: "[boolean]",
                                     description:
-                                        'Save the minecraft server to be used for this guild',
-                                },
-                                {
-                                    usage: '[address] [port]',
-                                    description: 'See the status of any given minecraft server',
+                                        "Restrict adding commands to people with <code>manage_server</code> permission",
                                 },
                             ],
                         },
                     ],
                 },
                 {
-                    name: 'Information',
-                    description: 'See bot related information',
+                    name: "Kpop",
+                    description: "Kpop related commands",
                     commandList: [
                         {
-                            name: 'info',
-                            description: 'Get some basic information about the bot',
-                        },
-                        { name: 'ping', description: 'See the current bot response time' },
-                        { name: 'invite', description: 'Invite Miso Bot to your server' },
-                        {
-                            name: 'donate',
-                            description:
-                                'See options for donating, Miso cannot stay online without your support!',
+                            name: "stan",
+                            description: "Get a random kpop artist to stan",
                         },
                         {
-                            name: 'donators',
-                            description: 'List of all the amazing people who have donated',
-                        },
-                        {
-                            name: 'commandstats',
+                            name: "idol",
+                            description: "Kpop idols database",
                             subcommands: [
                                 {
-                                    name: 'server',
-                                    usage: '(@user)',
-                                    description: 'Most used commands on this server',
+                                    name: "random",
+                                    usage: "(gender)",
+                                    description:
+                                        "Get profile of a random kpop idol",
                                 },
                                 {
-                                    name: 'global',
-                                    usage: '(@user)',
-                                    description: 'Most used commands globally',
-                                },
-                                {
-                                    usage: '[command]',
-                                    description: 'Stats for a specific command',
+                                    name: "birthdays",
+                                    usage: "[month] [day]",
+                                    description:
+                                        "See which kpop idols have birthdays on a given date",
                                 },
                             ],
-                        },
-                        {
-                            name: 'emojistats',
-                            usage: '(@user)',
-                            description:
-                                'See most used emojis on the server, optionally filtered by user',
-                        },
-                        {
-                            name: 'github',
-                            description: 'Get a link to the Miso Bot source code',
-                        },
-                        {
-                            name: 'changelog',
-                            usage: '(author) (repo)',
-                            description:
-                                'See the Miso Bot repository commits by default, or any other github repo',
-                        },
-                        {
-                            name: 'servericon',
-                            usage: '(guild_id)',
-                            description: 'See the server icon',
-                        },
-                        {
-                            name: 'shardinfo',
-                            description: 'Get information about current sharding status',
-                        },
-                        {
-                            name: 'system',
-                            description: 'Get information about current system resource usage',
                         },
                     ],
                 },
                 {
-                    name: 'Utility',
-                    description: 'Very useful commands',
+                    name: "Miscellaneous",
+                    description: "Miscellaneous commands",
                     commandList: [
                         {
-                            name: '!',
-                            usage: '[query...]',
+                            name: "ascii",
+                            usage: "[text...]",
+                            description: "Turn text into fancy ascii art",
+                        },
+                        {
+                            name: "choose",
+                            usage: "[choice1] or [choice2] or ... or [choiceN]",
+                            description: "Choose from any number of options",
+                        },
+                        {
+                            name: "eightball",
+                            usage: "[question]",
+                            description:
+                                "Ask a yes/no question from the all knowing Eight-ball",
+                        },
+                        {
+                            name: "rng",
+                            usage: "(start)-[end]",
+                            description:
+                                "Get a random number inside the given range",
+                        },
+                        {
+                            name: "clap",
+                            usage: "[sentence]",
+                            description: "Add claps between words",
+                        },
+                        {
+                            name: "color",
+                            usage: "[ #hex | @member | @role | url | random (amount) ] ...",
+                            description:
+                                "Get color from given source, give multiple sources to create a pattern",
+                        },
+                        {
+                            name: "emoji",
+                            usage: "[emoji]",
+                            description: "See emoji source image and data",
+                        },
+                        {
+                            name: "ship",
+                            usage: "[name] and [name]",
+                            description: "Ship two people",
+                        },
+                        {
+                            name: "marry",
+                            usage: "[user]",
+                            description: "Marry someone",
+                        },
+                        {
+                            name: "marriage",
+                            description: "Check your marriage status",
+                        },
+                        { name: "divorce", description: "End your marriage" },
+                        {
+                            name: "horoscope",
+                            description: "Check your daily horoscope",
+                            subcommands: [
+                                {
+                                    name: "set",
+                                    usage: "[zodiac]",
+                                    description: "Save your zodiac sign",
+                                },
+                                {
+                                    name: "list",
+                                    description:
+                                        "List all zodiac signs along with their date ranges",
+                                },
+                                {
+                                    name: "tomorrow",
+                                    description:
+                                        "See your horoscope for tomorrow",
+                                },
+                                {
+                                    name: "yesterday",
+                                    description:
+                                        "See your horoscope from yesterday",
+                                },
+                            ],
+                        },
+                        {
+                            name: "minecraft",
+                            description:
+                                "See the status of saved minecraft server",
+                            subcommands: [
+                                {
+                                    name: "save",
+                                    usage: "[address] [port]",
+                                    description:
+                                        "Save the minecraft server to be used for this guild",
+                                },
+                                {
+                                    usage: "[address] [port]",
+                                    description:
+                                        "See the status of any given minecraft server",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    name: "Information",
+                    description: "See bot related information",
+                    commandList: [
+                        {
+                            name: "info",
+                            description:
+                                "Get some basic information about the bot",
+                        },
+                        {
+                            name: "ping",
+                            description: "See the current bot response time",
+                        },
+                        {
+                            name: "invite",
+                            description: "Invite Miso Bot to your server",
+                        },
+                        {
+                            name: "donate",
+                            description:
+                                "See options for donating, Miso cannot stay online without your support!",
+                        },
+                        {
+                            name: "donators",
+                            description:
+                                "List of all the amazing people who have donated",
+                        },
+                        {
+                            name: "commandstats",
+                            subcommands: [
+                                {
+                                    name: "server",
+                                    usage: "(@user)",
+                                    description:
+                                        "Most used commands on this server",
+                                },
+                                {
+                                    name: "global",
+                                    usage: "(@user)",
+                                    description: "Most used commands globally",
+                                },
+                                {
+                                    usage: "[command]",
+                                    description: "Stats for a specific command",
+                                },
+                            ],
+                        },
+                        {
+                            name: "emojistats",
+                            usage: "(@user)",
+                            description:
+                                "See most used emojis on the server, optionally filtered by user",
+                        },
+                        {
+                            name: "github",
+                            description:
+                                "Get a link to the Miso Bot source code",
+                        },
+                        {
+                            name: "changelog",
+                            usage: "(author) (repo)",
+                            description:
+                                "See the Miso Bot repository commits by default, or any other github repo",
+                        },
+                        {
+                            name: "servericon",
+                            usage: "(guild_id)",
+                            description: "See the server icon",
+                        },
+                        {
+                            name: "shardinfo",
+                            description:
+                                "Get information about current sharding status",
+                        },
+                        {
+                            name: "system",
+                            description:
+                                "Get information about current system resource usage",
+                        },
+                    ],
+                },
+                {
+                    name: "Utility",
+                    description: "Very useful commands",
+                    commandList: [
+                        {
+                            name: "!",
+                            usage: "[query...]",
                             description:
                                 '<a href="https://duckduckgo.com/bang">duckduckgo.com/bang</a>',
                         },
                         {
-                            name: 'creategif',
-                            usage: '[url]',
-                            description: 'Attempt to create a Gfycat GIF from given media',
+                            name: "creategif",
+                            usage: "[url]",
+                            description:
+                                "Attempt to create a Gfycat GIF from given media",
                         },
                         {
-                            name: 'streamable',
-                            usage: '[url]',
-                            description: 'Attempt to create a streamable from given media',
+                            name: "streamable",
+                            usage: "[url]",
+                            description:
+                                "Attempt to create a streamable from given media",
                         },
                         {
-                            name: 'define',
-                            usage: '[word...]',
-                            description: 'Get definition for a word from Oxford Dictionary',
+                            name: "define",
+                            usage: "[word...]",
+                            description:
+                                "Get definition for a word from Oxford Dictionary",
                         },
                         {
-                            name: 'thesaurus',
-                            usage: '[word...]',
-                            description: 'Get synonyms for a word',
+                            name: "thesaurus",
+                            usage: "[word...]",
+                            description: "Get synonyms for a word",
                         },
                         {
-                            name: 'urban',
-                            usage: '[word...]',
-                            description: 'Get definition for a word from Urban Dictionary',
+                            name: "urban",
+                            usage: "[word...]",
+                            description:
+                                "Get definition for a word from Urban Dictionary",
                         },
                         {
-                            name: 'translate',
-                            description: 'Translate text using Naver Papago and Google translate',
+                            name: "translate",
+                            description:
+                                "Translate text using Naver Papago and Google translate",
                             subcommands: [
                                 {
-                                    usage: '[text...]',
+                                    usage: "[text...]",
                                     description:
-                                        'Automatically detect language and translate to english',
+                                        "Automatically detect language and translate to english",
                                 },
                                 {
-                                    usage: '/xx [text..]',
-                                    description: 'Specify target language',
+                                    usage: "/xx [text..]",
+                                    description: "Specify target language",
                                 },
                                 {
-                                    usage: 'xx/yy [text...]',
-                                    description: 'Specify both source and target language',
+                                    usage: "xx/yy [text...]",
+                                    description:
+                                        "Specify both source and target language",
                                 },
                             ],
                         },
                         {
-                            name: 'wolfram',
-                            usage: '[query...]',
-                            description: 'Ask anything from Wolfram|Alpha',
+                            name: "wolfram",
+                            usage: "[query...]",
+                            description: "Ask anything from Wolfram|Alpha",
                         },
                         {
-                            name: 'weather',
-                            description: 'Check the weather of your saved location',
+                            name: "weather",
+                            description:
+                                "Check the weather of your saved location",
                             subcommands: [
                                 {
-                                    name: 'save',
-                                    usage: '[location...]',
-                                    description: 'Save your location for future weather requests',
+                                    name: "save",
+                                    usage: "[location...]",
+                                    description:
+                                        "Save your location for future weather requests",
                                 },
                                 {
-                                    usage: '[location]',
-                                    description: 'See the weather of given location',
+                                    usage: "[location]",
+                                    description:
+                                        "See the weather of given location",
                                 },
                             ],
                         },
                         {
-                            name: 'stock',
-                            usage: '[ticker]',
-                            description: 'See price data for any stock in the NASDAQ',
+                            name: "stock",
+                            usage: "[ticker]",
+                            description:
+                                "See price data for any stock in the NASDAQ",
                         },
                         {
-                            name: 'remindme',
+                            name: "remindme",
                             subcommands: [
                                 {
-                                    name: 'in',
-                                    usage: '[some time] to [something...]',
-                                    description: 'Get reminded after given duration of time',
+                                    name: "in",
+                                    usage: "[some time] to [something...]",
+                                    description:
+                                        "Get reminded after given duration of time",
                                 },
                                 {
-                                    name: 'on',
-                                    usage: '[YYYY/MM/DD] (HH:mm:ss) to [something...]',
+                                    name: "on",
+                                    usage: "[YYYY/MM/DD] (HH:mm:ss) to [something...]",
                                     description:
-                                        'Get reminded on specified datetime (timezone UTC)',
+                                        "Get reminded on specified datetime (timezone UTC)",
                                 },
                             ],
                         },
                     ],
                 },
                 {
-                    name: 'User',
-                    description: 'User and guild related commands',
+                    name: "User",
+                    description: "User and guild related commands",
                     commandList: [
                         {
-                            name: 'avatar',
-                            usage: '(@user)',
+                            name: "avatar",
+                            usage: "(@user)",
                             description: "Get user's profile picture",
                         },
                         {
-                            name: 'activity',
-                            usage: '(@user) global',
-                            description: 'Your hourly activity chart (GMT)',
+                            name: "banner",
+                            usage: "(@user)",
+                            description: "Get user's banner image",
                         },
                         {
-                            name: 'rank',
-                            usage: '(@user)',
-                            description: 'See your XP ranking',
+                            name: "activity",
+                            usage: "(@user) global",
+                            description: "Your hourly activity chart (GMT)",
                         },
                         {
-                            name: 'globalrank',
-                            usage: '(@user)',
-                            description: 'See your global XP ranking',
+                            name: "rank",
+                            usage: "(@user)",
+                            description: "See your XP ranking",
                         },
                         {
-                            name: 'profile',
-                            usage: '(@user)',
-                            description: 'Your personal customizable user profile',
+                            name: "globalrank",
+                            usage: "(@user)",
+                            description: "See your global XP ranking",
                         },
                         {
-                            name: 'editprofile',
-                            description: 'Edit your profile',
+                            name: "profile",
+                            usage: "(@user)",
+                            description:
+                                "Your personal customizable user profile",
+                        },
+                        {
+                            name: "editprofile",
+                            description: "Edit your profile",
                             subcommands: [
                                 {
-                                    name: 'description',
-                                    usage: '[text...]',
-                                    description: 'Change the description on your profile',
+                                    name: "description",
+                                    usage: "[text...]",
+                                    description:
+                                        "Change the description on your profile",
                                 },
                                 {
-                                    name: 'color',
-                                    usage: '[#hex]',
+                                    name: "color",
+                                    usage: "[#hex]",
                                     description:
-                                        'Set a background color to be used instead of your role color',
+                                        "Set a background color to be used instead of your role color",
                                 },
                                 {
-                                    name: 'background',
-                                    usage: '[url]',
+                                    name: "background",
+                                    usage: "[url]",
                                     description:
-                                        'Set a custom background image, must be a direct link',
+                                        "Set a custom background image, must be a direct link",
                                 },
                                 {
-                                    name: 'graph',
-                                    usage: '[boolean]',
+                                    name: "graph",
+                                    usage: "[boolean]",
                                     description:
-                                        'Toggle whether to show activity graph on your profile or not',
+                                        "Toggle whether to show activity graph on your profile or not",
                                 },
                             ],
                         },
                         {
-                            name: 'hug',
-                            usage: '(huggable)',
-                            description: 'Hug someone or something',
+                            name: "hug",
+                            usage: "(huggable)",
+                            description: "Hug someone or something",
                         },
                         {
-                            name: 'members',
-                            description: 'Show the most recently joined members',
-                        },
-                        { name: 'roleslist', description: 'List all roles on this server' },
-                        {
-                            name: 'serverinfo',
-                            description: 'Show information about this server',
+                            name: "members",
+                            description:
+                                "Show the most recently joined members",
                         },
                         {
-                            name: 'userinfo',
-                            usage: '(@user)',
-                            description: 'Show information about a user',
+                            name: "roleslist",
+                            description: "List all roles on this server",
                         },
                         {
-                            name: 'topservers',
-                            description: 'List your most active servers with Miso Bot',
+                            name: "serverinfo",
+                            description: "Show information about this server",
                         },
                         {
-                            name: 'leaderboard',
-                            description: 'Various leaderboards',
+                            name: "serverbanner",
+                            usage: "(@user)",
+                            description: "Get the server banner image",
+                        },
+                        {
+                            name: "userinfo",
+                            usage: "(@user)",
+                            description: "Show information about a user",
+                        },
+                        {
+                            name: "topservers",
+                            description:
+                                "List your most active servers with Miso Bot",
+                        },
+                        {
+                            name: "leaderboard",
+                            description: "Various leaderboards",
                             subcommands: [
                                 {
-                                    name: 'fishy',
-                                    usage: 'global',
-                                    description: 'Fishy leaderboard',
+                                    name: "fishy",
+                                    usage: "global",
+                                    description: "Fishy leaderboard",
                                 },
                                 {
-                                    name: 'levels',
-                                    usage: 'global',
-                                    description: 'XP leaderboard',
+                                    name: "levels",
+                                    usage: "global",
+                                    description: "XP leaderboard",
                                 },
                                 {
-                                    name: 'wpm',
-                                    usage: 'global',
-                                    description: 'Typing test high scores leaderboard',
+                                    name: "wpm",
+                                    usage: "global",
+                                    description:
+                                        "Typing test high scores leaderboard",
                                 },
                                 {
-                                    name: 'crowns',
-                                    description: 'Last.fm artist crowns leaderboard',
+                                    name: "crowns",
+                                    description:
+                                        "Last.fm artist crowns leaderboard",
                                 },
                             ],
                         },

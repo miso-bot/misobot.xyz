@@ -6,7 +6,10 @@
                 <span class="usage-string">{{ command.usage }}</span></code
             >
         </div>
-        <span class="description column" v-html="renderDescription(command.description)"></span>
+        <span
+            class="description column"
+            v-html="renderDescription(command.description)"
+        ></span>
     </div>
     <SubCommand
         v-for="item in command.subcommands"
@@ -35,9 +38,9 @@
 </style>
 
 <script>
-import SubCommand from './Subcommand.vue';
+import SubCommand from "./Subcommand.vue";
 export default {
-    name: 'Command',
+    name: "Command",
     data() {
         return { margin: 0 };
     },

@@ -26,7 +26,8 @@
                     class="navbar-menu"
                     :class="{
                         'is-active': isHamburgerOpen,
-                        'has-background-primary': coloredNavbar && isHamburgerOpen,
+                        'has-background-primary':
+                            coloredNavbar && isHamburgerOpen,
                     }"
                 >
                     <div class="navbar-end">
@@ -40,10 +41,15 @@
                             <a href="#section-donate" v-smooth-scroll>Donate</a>
                         </div>
                         <div class="navbar-item navbar-clickable">
-                            <a href="#section-documentation" v-smooth-scroll>Documentation</a>
+                            <a href="#section-documentation" v-smooth-scroll
+                                >Documentation</a
+                            >
                         </div>
                         <span class="navbar-item navbar-clickable">
-                            <a href="https://github.com/joinemm/miso-bot" class="github-icon">
+                            <a
+                                href="https://github.com/joinemm/miso-bot"
+                                class="github-icon"
+                            >
                                 <font-awesome-icon :icon="['fab', 'github']" />
                             </a>
                         </span>
@@ -94,7 +100,7 @@
 
 <script>
 export default {
-    name: 'Header',
+    name: "Header",
     data() {
         return {
             coloredNavbar: false,
@@ -117,7 +123,7 @@ export default {
         },
     },
     mounted() {
-        window.addEventListener('scroll', this.updateScroll);
+        window.addEventListener("scroll", this.updateScroll);
     },
 };
 </script>

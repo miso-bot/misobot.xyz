@@ -6,9 +6,9 @@
     </div>
 </template>
 <script>
-import { CountUp } from 'countup.js';
+import { CountUp } from "countup.js";
 export default {
-    name: 'CountTo',
+    name: "CountTo",
     data() {
         return {
             counter: null,
@@ -17,7 +17,7 @@ export default {
     props: {
         id: {
             type: String,
-            default: 'myCounter',
+            default: "myCounter",
         },
         startVal: {
             type: Number,
@@ -49,11 +49,11 @@ export default {
         },
         separator: {
             type: String,
-            default: ',',
+            default: ",",
         },
         decimal: {
             type: String,
-            default: '.',
+            default: ".",
         },
     },
     mounted() {

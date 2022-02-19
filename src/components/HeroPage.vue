@@ -2,10 +2,17 @@
     <div class="hero-body">
         <div id="introContent" class="container has-text-centered">
             <div class="avatar-container">
-                <img src="../assets/icon_circle.png" alt="Logo" style="max-width: 5rem;" />
+                <img
+                    src="../assets/icon_circle.png"
+                    alt="Logo"
+                    style="max-width: 5rem"
+                />
                 <span
                     class="status-circle"
-                    :class="{ 'status-online': online, 'status-offline': !online }"
+                    :class="{
+                        'status-online': online,
+                        'status-offline': !online,
+                    }"
                 >
                     <span class="tooltiptext">{{ ping }}</span>
                 </span>
@@ -100,7 +107,7 @@
     left: 150%;
 }
 .status-circle .tooltiptext::after {
-    content: ' ';
+    content: " ";
     position: absolute;
     top: 50%;
     right: 100%; /* To the left of the tooltip */
@@ -122,18 +129,18 @@
 </style>
 
 <script>
-import Stats from './Stats.vue';
-import Wave from './Wave.vue';
+import Stats from "./Stats.vue";
+import Wave from "./Wave.vue";
 export default {
-    name: 'HeroPage',
+    name: "HeroPage",
     components: {
         Stats,
         Wave,
     },
     data() {
         return {
-            pingUrl: 'https://api.misobot.xyz/ping',
-            ping: 'offline',
+            pingUrl: "https://api.misobot.xyz/ping",
+            ping: "offline",
             online: false,
         };
     },
@@ -148,14 +155,14 @@ export default {
                 this.ping = parseInt(data);
                 if (isNaN(this.ping) || this.ping == undefined) {
                     this.online = false;
-                    this.ping = 'offline';
+                    this.ping = "offline";
                 } else {
                     this.online = true;
-                    this.ping = this.ping + ' ms';
+                    this.ping = this.ping + " ms";
                 }
             })
             .catch((error) => {
-                console.error('Error:', error);
+                console.error("Error:", error);
                 this.online = false;
             });
     },

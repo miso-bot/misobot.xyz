@@ -2,13 +2,17 @@
     <footer class="footer">
         <div class="container has-text-centered">
             <p>
-                <strong>Miso Bot</strong> by <a href="https://joinemm.dev">Joinemm#7184</a><br />
-                This page is <strong>open source.</strong> Noticed a typo? Or something unclear?<br />
+                <strong>Miso Bot</strong> by
+                <a href="https://joinemm.dev">Joinemm#7184</a><br />
+                This page is <strong>open source.</strong> Noticed a typo? Or
+                something unclear?<br />
                 <a href="https://github.com/joinemm/miso-bot-website"
                     >Improve this page on GitHub</a
                 >
             </p>
-            <span style="font-style: italic"><code>Built with vue.js</code></span>
+            <span style="font-style: italic"
+                ><code>Built with vue.js</code></span
+            >
             <div class="icon"><img src="../assets/vue-icon.png" /></div>
             <br />
             <div class="avainlippu"><img src="../assets/avainlippu.png" /></div>
@@ -43,6 +47,6 @@ code {
 
 <script>
 export default {
-    name: 'Footer',
+    name: "Footer",
 };
 </script>
