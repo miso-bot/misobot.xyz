@@ -15,7 +15,7 @@
                 <p v-html="group.description"></p>
                 <p>
                     <Command
-                        v-for="cmd in group.commandList"
+                        v-for="cmd in group.commands"
                         v-bind:command="cmd"
                         v-bind:key="cmd.name"
                         :prefix="prefix"
