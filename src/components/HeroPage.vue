@@ -24,7 +24,7 @@
                 {{ subtitle }}
             </h2>
             <button
-                onclick="window.open('https://discord.com/oauth2/authorize?client_id=500385855072894982&scope=bot&permissions=1074654407','_blank');"
+                onclick="window.open('https://discord.com/api/oauth2/authorize?client_id=500385855072894982&permissions=8&scope=bot','_blank');"
                 class="button is-rounded is-primary"
             >
                 Add to your server
