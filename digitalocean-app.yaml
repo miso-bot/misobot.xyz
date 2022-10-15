@@ -1,6 +1,6 @@
-domains:
-  - domain: misobot.xyz
-    type: PRIMARY
+# domains:
+#   - domain: misobot.xyz
+#     type: PRIMARY
 name: miso-bot-website
 region: ams
 
