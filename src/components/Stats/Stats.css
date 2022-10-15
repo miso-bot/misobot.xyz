@@ -1,0 +1,62 @@
+.stats__grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+  grid-gap: 2em;
+}
+
+.stat {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.status-indicator.online,
+.online .blink {
+  background-color: #0fcc45;
+}
+
+.status-indicator.offline,
+.offline .blink {
+  background-color: #ed4245;
+  animation: none;
+}
+
+.status-indicator.away,
+.away .blink {
+  background-color: #e4cb11;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2em;
+}
+
+.blink {
+  display: block;
+  width: 15px;
+  height: 15px;
+
+  opacity: 0.7;
+  border-radius: 50%;
+
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  100% {
+    transform: scale(2, 2);
+    opacity: 0;
+  }
+}

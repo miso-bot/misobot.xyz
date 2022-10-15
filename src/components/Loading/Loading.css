@@ -1,0 +1,8 @@
+.loading {
+    padding-top: 4em;
+}
+
+.loading svg {
+    margin: auto;
+    color: var(--clr-primary);
+}

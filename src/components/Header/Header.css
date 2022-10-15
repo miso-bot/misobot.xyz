@@ -1,0 +1,36 @@
+.header {
+  height: 8em;
+  max-width: 1100px;
+  width: 95%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.home_icon {
+  border-radius: 50%;
+  height: 64px;
+  width: 64px;
+  transition: 0.1s;
+  background-color: #64a3b6;
+  box-shadow: var(--shadow);
+}
+
+.home_icon:hover {
+  box-shadow: #9fdaec 0 0 15px 0px;
+}
+
+.home_icon img {
+  border-radius: 50%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home_icon a {
+  background: none;
+}
+
+@media (max-width: 600px) {
+  .header {
+    height: 6em;
+  }
+}
