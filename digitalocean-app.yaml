@@ -14,5 +14,6 @@ static_sites:
     name: miso-bot-website
     routes:
       - path: /
+      - path: /docs
     cors:
       allow_credentials: True
