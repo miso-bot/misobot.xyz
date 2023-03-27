@@ -1,0 +1,61 @@
+.header {
+  height: 8em;
+  max-width: 800px;
+  width: 95%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.home_icon {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  transition: 0.1s;
+  background-color: #64a3b6;
+  box-shadow: var(--shadow);
+}
+
+.icon__centered {
+  height: 50px;
+  width: 50px;
+  margin: auto;
+}
+
+.backbutton__container,
+.center__container,
+.nav {
+  width: 33%;
+  align-items: center;
+}
+
+.backbutton__container {
+  height: 24px;
+}
+
+.backbutton {
+  margin-left: 0.5em;
+}
+
+.nav {
+  justify-content: flex-end;
+}
+
+.home_icon:hover {
+  box-shadow: #9fdaec 0 0 15px 0px;
+}
+
+.home_icon img {
+  border-radius: 50%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home_icon a {
+  background: none;
+}
+
+@media (max-width: 600px) {
+  .header {
+    height: 6em;
+  }
+}

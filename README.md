@@ -1,25 +1,21 @@
-# miso-bot-website
+# Miso Bot website
 
 Website for [Miso Bot](https://github.com/joinemm/miso-bot)
 
-Styling provided by [Bulma](https://bulma.io/)
+### Developing
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+```sh
+yarn
+yarn start
 ```
 
-### Compiles and minifies for production
-```
+### Deploying
+
+```sh
+yarn
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+---
+
+Styling based on [cleanfolio](https://github.com/rajshekhar26/cleanfolio) by Raj Shekhar
