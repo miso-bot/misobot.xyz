@@ -8,12 +8,12 @@ static_sites:
   - build_command: yarn build
     environment_slug: node-js
     github:
-      branch: react-rewrite
+      branch: master
       deploy_on_push: true
       repo: joinemm/miso-bot-website
     name: miso-bot-website
     routes:
       - path: /
-      - path: /docs
+      - path: /commands
     cors:
       allow_credentials: True
