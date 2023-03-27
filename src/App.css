@@ -28,10 +28,15 @@
 }
 
 main {
-  max-width: 1100px;
+  max-width: 800px;
   width: 95%;
   margin: 0 auto;
   flex-grow: 1;
+  overflow: hidden;
+}
+
+.thinner-main {
+  max-width: 800px;
 }
 
 .section {
@@ -148,6 +153,15 @@ main {
 
 .btn--icon:active {
   transform: translateY(-5px);
+}
+
+code {
+  font-family: monospace;
+  font-size: 1rem;
+  background-color: #36393f;
+  color: #dcddde;
+  padding: 2px;
+  border-radius: 3px;
 }
 
 @media (max-width: 600px) {

@@ -28,6 +28,7 @@
       }
     ],
     "react/prop-types": "off",
-    "prettier/prettier": "warn"
+    "prettier/prettier": "warn",
+    "jsx-a11y/interactive-supports-focus": "off"
   }
 }

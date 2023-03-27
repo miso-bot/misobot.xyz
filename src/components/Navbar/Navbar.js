@@ -1,9 +1,6 @@
 import { useContext, useState } from 'react'
-import { useMediaQuery } from '@material-ui/core'
-import Brightness2Icon from '@material-ui/icons/Brightness2'
-import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded'
-import MenuIcon from '@material-ui/icons/Menu'
-import CloseIcon from '@material-ui/icons/Close'
+import { useMediaQuery } from '@mui/material'
+import { Brightness2, WbSunnyRounded, Menu, Close } from '@mui/icons-material'
 import { ThemeContext } from '../../contexts/theme'
 import './Navbar.css'
 
@@ -15,7 +12,7 @@ const Navbar = () => {
 
   const toggleNavList = () => setShowNavList(!showNavList)
 
-  const isHamburger = useMediaQuery('(max-width:600px)')
+  const isHamburger = useMediaQuery('(max-width:800px)')
 
   return (
     <nav className='center nav'>
@@ -32,7 +29,11 @@ const Navbar = () => {
         )}
 
         <li className='nav__list-item'>
-          <a href='/docs' onClick={toggleNavList} className='link link--nav'>
+          <a
+            href='/commands'
+            onClick={toggleNavList}
+            className='link link--nav'
+          >
             Commands
           </a>
         </li>
@@ -64,7 +65,11 @@ const Navbar = () => {
         className='btn btn--icon nav__theme'
         aria-label='toggle theme'
       >
-        {themeName === 'dark' ? <WbSunnyRoundedIcon /> : <Brightness2Icon />}
+        {themeName === 'dark' ? (
+          <WbSunnyRounded sx={{ fontSize: 40 }} />
+        ) : (
+          <Brightness2 sx={{ fontSize: 40 }} />
+        )}
       </button>
 
       <button
@@ -73,7 +78,11 @@ const Navbar = () => {
         className='btn btn--icon nav__hamburger'
         aria-label='toggle navigation'
       >
-        {showNavList ? <CloseIcon /> : <MenuIcon />}
+        {showNavList ? (
+          <Close sx={{ fontSize: 40 }} />
+        ) : (
+          <Menu sx={{ fontSize: 40 }} />
+        )}
       </button>
     </nav>
   )

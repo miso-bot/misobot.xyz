@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import Documentation from '../components/Documentation/Documentation'
+import Cog from '../components/Cog/Cog'
 import Loading from '../components/Loading/Loading'
+import Header from '../components/Header/Header'
 
-const Docs = ({ theme }) => {
+const Commands = ({ theme }) => {
   const [appState, setAppState] = useState({
     loading: true,
     cogs: [],
   })
 
   useEffect(() => {
+    setAppState({ loading: true })
     fetch(`https://api.misobot.xyz/documentation`)
       .then((response) => response.json())
       .then((data) => {
@@ -20,17 +22,24 @@ const Docs = ({ theme }) => {
       .catch(() => {
         setAppState({ loading: false })
       })
-  }, [setAppState])
+  }, [])
 
   return (
-    <main>
-      {appState.loading ? (
-        <Loading theme={theme} />
-      ) : (
-        <Documentation cogs={appState.cogs} />
-      )}
-    </main>
+    <>
+      <Header />
+      <main className='thinner-main'>
+        {appState.loading ? (
+          <Loading theme={theme} />
+        ) : (
+          <>
+            {appState.cogs.map((cog) => (
+              <Cog cog={cog} />
+            ))}
+          </>
+        )}
+      </main>
+    </>
   )
 }
 
-export default Docs
+export default Commands

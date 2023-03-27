@@ -1,8 +1,8 @@
 .loading {
-    padding-top: 4em;
+  padding-top: 4em;
 }
 
 .loading svg {
-    margin: auto;
-    color: var(--clr-primary);
+  margin: auto;
+  color: var(--clr-primary);
 }
