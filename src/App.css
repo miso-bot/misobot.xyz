@@ -169,3 +169,20 @@ code {
     margin-top: 4em;
   }
 }
+
+.flexlist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  flex-direction: column;
+}
+
+.flexlist-item {
+  text-align: center;
+  width: 200px;
+}
+
+.pad-top {
+  padding-top: 1em;
+}

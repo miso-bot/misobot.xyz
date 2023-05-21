@@ -36,6 +36,7 @@
 }
 
 code {
+  color: var(--clr-fg);
   background: none;
   font-weight: bold;
 }

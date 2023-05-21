@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer'
 import './App.css'
 import Home from './pages'
 import Commands from './pages/commands'
+import Donate from './pages/donate'
 
 const App = () => {
   const [{ themeName }] = useContext(ThemeContext)
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Home theme={themeName} />} />
           <Route path='/commands' element={<Commands theme={themeName} />} />
+          <Route path='/donate' element={<Donate theme={themeName} />} />
         </Routes>
 
         <ScrollToTop />
